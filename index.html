@@ -4964,49 +4964,58 @@ async function loadFxRates() {
   if (fxLoaded) return;
   const el = document.getElementById('fxContent');
   const meta = document.getElementById('fxMeta');
-  try {
-    // Two calls: USD-base and EUR-base, to cover all pairs
-    const [usdRes, eurRes, gbpRes] = await Promise.all([
-      fetch('https://api.frankfurter.dev/v2/rates?base=USD&quotes=EUR,GBP,AUD,NZD,SGD,THB,IDR,ZAR'),
-      fetch('https://api.frankfurter.dev/v2/rates?base=EUR&quotes=USD,GBP,NOK,TRY,ISK'),
-      fetch('https://api.frankfurter.dev/v2/rates?base=GBP&quotes=USD,EUR')
-    ]);
-    const usd = await usdRes.json();
-    const eur = await eurRes.json();
-    const gbp = await gbpRes.json();
-    
-    // Build a lookup of all rates
-    const rates = {};
-    // USD-based
-    if (usd.rates) for (const [k, v] of Object.entries(usd.rates)) rates['USD/' + k] = v;
-    // EUR-based  
-    if (eur.rates) for (const [k, v] of Object.entries(eur.rates)) rates['EUR/' + k] = v;
-    // GBP-based
-    if (gbp.rates) for (const [k, v] of Object.entries(gbp.rates)) rates['GBP/' + k] = v;
-    
-    let html = '';
-    for (const pair of FX_PAIRS) {
-      const key = pair.base + '/' + pair.quote;
-      const rate = rates[key];
-      if (rate !== undefined) {
-        // Format: large currencies to 4dp, IDR/ISK to 0dp
-        const fmt = ['IDR','ISK','KRW'].includes(pair.quote) ? rate.toFixed(0) :
-                    ['THB','ZAR','NOK','TRY','NZD','AUD','SGD'].includes(pair.quote) ? rate.toFixed(3) :
-                    rate.toFixed(4);
-        html += `<div class="fx-row"><span class="fx-pair">${pair.label}</span><span class="fx-rate">${fmt}</span></div>`;
-      }
-    }
-    el.innerHTML = html || '<div style="color:var(--text-dim)">No rates available</div>';
-    
-    // Show the date from the API response
-    const rateDate = usd.date || eur.date || '';
-    meta.textContent = rateDate ? `ECB reference · ${rateDate} · via Frankfurter API` : 'Frankfurter API · ECB reference rates';
-    fxLoaded = true;
-    
-  } catch(err) {
-    el.innerHTML = `<div style="color:var(--text-dim);font-size:10px">Could not load rates<br><span style="font-size:9px">${err.message}</span></div>`;
-    meta.textContent = 'Offline — rates unavailable';
+  
+  // Try multiple API endpoints as fallback
+  const endpoints = [
+    { base: 'https://api.frankfurter.dev/v1/latest', label: 'frankfurter.dev' },
+    { base: 'https://api.frankfurter.app/latest', label: 'frankfurter.app' }
+  ];
+  
+  let usd = null, eur = null, gbp = null, source = '', rateDate = '';
+  
+  for (const ep of endpoints) {
+    try {
+      const [usdRes, eurRes, gbpRes] = await Promise.all([
+        fetch(`${ep.base}?base=USD&symbols=EUR,GBP,AUD,NZD,SGD,THB,IDR,ZAR`),
+        fetch(`${ep.base}?base=EUR&symbols=USD,GBP,NOK,TRY,ISK`),
+        fetch(`${ep.base}?base=GBP&symbols=USD,EUR`)
+      ]);
+      if (!usdRes.ok || !eurRes.ok || !gbpRes.ok) continue;
+      usd = await usdRes.json();
+      eur = await eurRes.json();
+      gbp = await gbpRes.json();
+      source = ep.label;
+      rateDate = usd.date || eur.date || '';
+      break;
+    } catch(e) { continue; }
   }
+  
+  if (!usd || !eur || !gbp) {
+    el.innerHTML = '<div style="color:var(--text-dim);font-size:10px">Could not load rates</div>';
+    meta.textContent = 'API unavailable — try refreshing';
+    return;
+  }
+  
+  // Build a lookup of all rates (v1 format: { rates: { EUR: 0.92, ... } })
+  const rates = {};
+  if (usd.rates) for (const [k, v] of Object.entries(usd.rates)) rates['USD/' + k] = v;
+  if (eur.rates) for (const [k, v] of Object.entries(eur.rates)) rates['EUR/' + k] = v;
+  if (gbp.rates) for (const [k, v] of Object.entries(gbp.rates)) rates['GBP/' + k] = v;
+  
+  let html = '';
+  for (const pair of FX_PAIRS) {
+    const key = pair.base + '/' + pair.quote;
+    const rate = rates[key];
+    if (rate !== undefined) {
+      const fmt = ['IDR','ISK','KRW'].includes(pair.quote) ? rate.toFixed(0) :
+                  ['THB','ZAR','NOK','TRY','NZD','AUD','SGD'].includes(pair.quote) ? rate.toFixed(3) :
+                  rate.toFixed(4);
+      html += `<div class="fx-row"><span class="fx-pair">${pair.label}</span><span class="fx-rate">${fmt}</span></div>`;
+    }
+  }
+  el.innerHTML = html || '<div style="color:var(--text-dim)">No rates available</div>';
+  meta.textContent = rateDate ? `ECB reference · ${rateDate} · ${source}` : `${source} · ECB reference rates`;
+  fxLoaded = true;
 }
 
 // Load FX rates on page load
