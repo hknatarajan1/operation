@@ -35,7 +35,7 @@ body{font-family:'Karla',sans-serif;font-weight:300;background:var(--bg);color:v
 .view-nav-btn.active{color:var(--text);font-weight:500}
 .view-nav-btn.active::after{content:'';position:absolute;left:2px;right:2px;bottom:-2px;height:1px;background:var(--accent)}
 
-.header-right{display:flex;align-items:center;gap:20px;flex-shrink:0}
+.header-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
 
 /* LAYER POPOVER */
 .layer-popover-wrap{position:relative}
@@ -76,6 +76,7 @@ body{font-family:'Karla',sans-serif;font-weight:300;background:var(--bg);color:v
 @media print {
   body{overflow:visible !important;height:auto !important}
   .header,.sec-bar,#map,.dp,#compareView,.bo-close,.bf-print-btn,.bf-hero-actions,.alert-refresh-btn,#alertRefreshArea{display:none !important}
+  #alertsView{display:none !important}
   /* BRIEFING OVERLAY PRINT */
   .bo{position:static !important;overflow:visible !important;height:auto !important;background:white !important}
   .bo-scroll{position:static !important;overflow:visible !important;height:auto !important;max-width:100% !important;padding:20px !important}
@@ -227,6 +228,12 @@ body{font-family:'Karla',sans-serif;font-weight:300;background:var(--bg);color:v
 .bf-table td:first-child{font-weight:400;color:var(--text)}
 .bf-table tr:last-child td{border-bottom:none}
 
+/* ── ALERT BELL BADGE ── */
+.header-icons{display:flex;align-items:center;gap:6px}
+.alert-count{position:absolute;top:-5px;right:-5px;min-width:15px;height:15px;border-radius:8px;background:var(--accent);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:8px;font-weight:600;display:flex;align-items:center;justify-content:center;padding:0 3px;line-height:1}
+.alert-count.clear{background:var(--green)}
+.alert-count.none{display:none}
+
 /* ── COMPARE VIEW ── */
 .compare-view{position:fixed;top:96px;left:0;right:0;bottom:0;z-index:500;background:var(--bg);display:none;overflow-y:auto}
 .compare-view.active{display:block}
@@ -234,6 +241,43 @@ body{font-family:'Karla',sans-serif;font-weight:300;background:var(--bg);color:v
 /* ── PASSAGES VIEW ── */
 .passages-view{position:fixed;top:96px;left:0;right:0;bottom:0;z-index:500;background:var(--bg);display:none;overflow-y:auto}
 .passages-view.active{display:block}
+
+/* ── ALERTS VIEW ── */
+.alerts-view{position:fixed;top:96px;left:0;right:0;bottom:0;z-index:500;background:var(--bg);display:none;overflow-y:auto}
+.alerts-view.active{display:block}
+.alerts-container{max-width:1000px;margin:0 auto;padding:32px 24px 80px}
+.alerts-hero-type{font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.alerts-hero-name{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:500;line-height:1.15;margin-bottom:8px}
+.alerts-hero-name em{font-style:italic;font-weight:300;color:var(--text-muted)}
+.alerts-hero-rule{width:48px;height:1px;background:var(--accent);margin:16px 0 12px}
+.alerts-hero-desc{font-family:'Karla',sans-serif;font-size:14px;font-weight:300;line-height:1.7;color:var(--text-body);max-width:720px;margin-bottom:28px}
+.alerts-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:28px}
+.alert-card{background:var(--bg-card);border:1px solid var(--border);padding:14px 16px;position:relative;transition:border-color .2s;cursor:pointer}
+.alert-card:hover{border-color:var(--border-strong)}
+.alert-card-bar{position:absolute;top:0;left:0;right:0;height:3px}
+.alert-card-bar.clear{background:var(--green)}
+.alert-card-bar.low{background:var(--amber)}
+.alert-card-bar.high{background:var(--red)}
+.alert-card-bar.unchecked{background:var(--text-dim)}
+.alert-card-name{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:500;margin-bottom:2px}
+.alert-card-airports{font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--text-dim);letter-spacing:0.3px;margin-bottom:8px}
+.alert-card-status{display:flex;align-items:center;gap:5px;margin-bottom:6px}
+.alert-card-dot{width:6px;height:6px;border-radius:50%}
+.alert-card-dot.clear{background:var(--green)}
+.alert-card-dot.low{background:var(--amber)}
+.alert-card-dot.high{background:var(--red)}
+.alert-card-dot.unchecked{background:var(--text-dim)}
+.alert-card-stxt{font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:500;letter-spacing:0.5px;text-transform:uppercase}
+.alert-card-stxt.clear{color:var(--green)}
+.alert-card-stxt.low{color:var(--amber)}
+.alert-card-stxt.high{color:var(--red)}
+.alert-card-stxt.unchecked{color:var(--text-dim)}
+.alert-card-body{font-family:'Karla',sans-serif;font-size:11.5px;font-weight:300;line-height:1.5;color:var(--text-body)}
+.alert-card-meta{font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--text-dim);margin-top:6px}
+.alerts-api-row{display:flex;gap:8px;align-items:center;margin-bottom:20px;flex-wrap:wrap}
+.alerts-summary{display:flex;gap:16px;margin-bottom:20px;font-family:'IBM Plex Mono',monospace;font-size:11px}
+.alerts-summary-item{display:flex;align-items:center;gap:5px}
+.alerts-summary-count{font-weight:600;font-size:14px}
 
 .compare-container{max-width:1200px;margin:0 auto;padding:32px 24px 80px}
 
@@ -469,28 +513,33 @@ body{font-family:'Karla',sans-serif;font-weight:300;background:var(--bg);color:v
       <button class="view-nav-btn" onclick="setView('passages')">Passages</button>
       <button class="view-nav-btn" onclick="setView('compare')">Compare</button>
     </nav>
-    <div class="layer-popover-wrap">
-      <button class="layer-icon-btn" id="fxBtn" onclick="toggleFxPopover(event)" title="Currency Rates">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-      </button>
-      <div class="layer-popover fx-popover" id="fxPopover" style="min-width:180px">
-        <div class="layer-popover-head">Indicative FX Rates</div>
-        <div id="fxContent" style="padding:6px 10px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text-body);line-height:1.9">
-          <div style="color:var(--text-dim);font-size:10px">Loading rates...</div>
+    <div class="header-icons">
+      <div class="layer-popover-wrap">
+        <button class="layer-icon-btn" id="fxBtn" onclick="toggleFxPopover(event)" title="Currency Rates">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </button>
+        <div class="layer-popover fx-popover" id="fxPopover" style="min-width:180px">
+          <div class="layer-popover-head">Indicative FX Rates</div>
+          <div id="fxContent" style="padding:6px 10px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text-body);line-height:1.9">
+            <div style="color:var(--text-dim);font-size:10px">Loading rates...</div>
+          </div>
+          <div id="fxMeta" style="padding:2px 10px 8px;font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--text-dim);letter-spacing:0.5px">Frankfurter API · ECB reference rates</div>
         </div>
-        <div id="fxMeta" style="padding:2px 10px 8px;font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--text-dim);letter-spacing:0.5px">Frankfurter API · ECB reference rates</div>
       </div>
-    </div>
-    <div class="layer-popover-wrap">
-      <button class="layer-icon-btn" id="alertCheckBtn" onclick="openAlertChecker()" title="Check Airport Alerts (API)" style="display:none">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-      </button>
-    </div>
-    <div class="layer-popover-wrap">
-      <button class="layer-icon-btn" id="layerIconBtn" onclick="toggleLayerPopover(event)">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-      </button>
-      <div class="layer-popover" id="layerPopover">
+      <div class="layer-popover-wrap">
+        <button class="layer-icon-btn" onclick="setView('alerts')" title="Travel Alerts" style="position:relative">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+          </svg>
+          <span class="alert-count" id="alertCountBadge">0</span>
+        </button>
+      </div>
+      <div class="layer-popover-wrap">
+        <button class="layer-icon-btn" id="layerIconBtn" onclick="toggleLayerPopover(event)" title="Map Style">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </button>
+        <div class="layer-popover" id="layerPopover">
         <div class="layer-popover-head">Map Style</div>
         <button class="layer-opt active" onclick="setLayer('light')">Voyager</button>
         <button class="layer-opt" onclick="setLayer('ocean')">Ocean</button>
@@ -580,6 +629,35 @@ body{font-family:'Karla',sans-serif;font-weight:300;background:var(--bg);color:v
   </div>
 </div>
 
+<!-- ALERTS VIEW -->
+<div class="alerts-view" id="alertsView">
+  <div class="alerts-container">
+    <div class="alerts-hero-type">Airport &amp; Travel Monitor</div>
+    <div class="alerts-hero-name">Live <em>Alerts</em></div>
+    <div class="alerts-hero-rule"></div>
+    <div class="alerts-hero-desc">Current airport and travel disruptions across all 22 destinations — strikes, terminal closures, security delays, airspace restrictions, and schedule disruptions that affect crew and guest transfers.</div>
+
+    <div class="alerts-summary" id="alertsSummary">
+      <div class="alerts-summary-item"><div class="alert-card-dot low"></div><span>Sample alerts from April 16, 2026 web research — connect API to refresh with live data</span></div>
+    </div>
+
+    <div class="alerts-grid" id="alertsGrid"></div>
+
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--text-dim);margin-top:16px;margin-bottom:24px">Results are advisory. Verify critical alerts against airline and airport sources before acting. Click any card to open the full destination briefing.</div>
+
+    <div class="alerts-api-row" style="border-top:1px solid var(--border);padding-top:20px">
+      <button class="intel-api-btn secondary" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none';this.textContent=this.nextElementSibling.style.display==='none'?'Connect API for Live Updates ▸':'Hide API Settings ▾'" style="font-size:10px">Connect API for Live Updates ▸</button>
+      <div style="display:none">
+        <div style="display:flex;gap:8px;align-items:center;margin:12px 0;flex-wrap:wrap">
+          <input type="password" class="intel-api-key-input" id="alertsApiKey" placeholder="sk-ant-..." style="max-width:320px" />
+          <button class="intel-api-btn secondary" onclick="saveAlertsKey()">Save Key</button>
+          <button class="intel-api-btn" id="alertsRunBtn" onclick="runAllAlertsCheck()" disabled>Check All Destinations</button>
+        </div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--text-dim)">Runs a Claude API call with web search across all 22 destinations. Checks airports for strikes, terminal closures, TSA/security delays, airspace restrictions, and schedule disruptions. Key stored in session only.</div>
+      </div>
+    </div>
+  </div>
+</div>
 <!-- PASSAGES VIEW -->
 <div class="passages-view" id="passagesView">
 <!-- MAIN -->
@@ -1802,25 +1880,25 @@ body{font-family:'Karla',sans-serif;font-weight:300;background:var(--bg);color:v
 
     <!-- API CONNECTION -->
     <div class="intel-api-section">
-      <div class="intel-api-title">Connect Claude API for Live Updates</div>
-      <div class="intel-api-sub">Anthropic API with Web Search</div>
-      <div class="intel-api-desc">Two query modes. <strong>Chokepoint Monitor:</strong> operational status, wait times, security. <strong>Passage Conditions:</strong> weather patterns, seasonal readiness, storm tracking. Or click "Check Conditions" on any passage briefing for a focused single-passage query.</div>
+      <button class="intel-api-btn secondary" onclick="var p=document.getElementById('intelApiPanel');p.style.display=p.style.display==='none'?'block':'none';this.textContent=p.style.display==='none'?'Connect API for Live Updates ▸':'Hide API Settings ▾'" style="font-size:10px;margin-bottom:0">Connect API for Live Updates ▸</button>
+      <div id="intelApiPanel" style="display:none;margin-top:16px">
+        <div class="intel-api-desc">Two query modes. <strong>Chokepoint Monitor:</strong> operational status, wait times, security. <strong>Passage Conditions:</strong> weather patterns, seasonal readiness, storm tracking. Or click "Check Conditions" on any passage briefing for a focused single-passage query.</div>
 
-      <div class="intel-api-key-row">
-        <input type="password" class="intel-api-key-input" id="intelApiKey" placeholder="sk-ant-..." />
-        <button class="intel-api-btn secondary" onclick="saveIntelKey()">Save Key</button>
-      </div>
+        <div class="intel-api-key-row">
+          <input type="password" class="intel-api-key-input" id="intelApiKey" placeholder="sk-ant-..." />
+          <button class="intel-api-btn secondary" onclick="saveIntelKey()">Save Key</button>
+        </div>
 
-      <div class="intel-api-desc" style="margin-top:0"><strong>Chokepoint Monitor checks:</strong></div>
-      <div class="intel-api-pre">Panama Canal      →  Wait times, booking availability, draft restrictions, Gatun Lake level
+        <div class="intel-api-desc" style="margin-top:0"><strong>Chokepoint Monitor checks:</strong></div>
+        <div class="intel-api-pre">Panama Canal      →  Wait times, booking availability, draft restrictions, Gatun Lake level
 Suez Canal        →  UKMTO advisories, Houthi activity, truce status, transit volumes
 Corinth Canal     →  Open/closed status, restoration schedule, reopening timeline
 Cape Horn         →  Drake Passage weather (7-day), storm systems, ice reports
 Cape of Good Hope →  Agulhas Current conditions, Cape weather, Cape Town port status
 Strait of Malacca →  Piracy reports (ReCAAP), traffic density, naval patrol status</div>
 
-      <div class="intel-api-desc" style="margin-top:12px"><strong>Passage Conditions checks:</strong></div>
-      <div class="intel-api-pre">Atlantic (W)     →  NOAA NHC tropical activity, trade wind status, Las Palmas conditions
+        <div class="intel-api-desc" style="margin-top:12px"><strong>Passage Conditions checks:</strong></div>
+        <div class="intel-api-pre">Atlantic (W)     →  NOAA NHC tropical activity, trade wind status, Las Palmas conditions
 Atlantic (E)     →  Azores High position, North Atlantic frontal activity, Bermuda/Azores conditions
 Indian Ocean     →  Current monsoon phase, cyclone activity both basins, Gulf of Aden security
 Pacific Crossing →  ITCZ position and width, SE trade wind status, Galapagos entry conditions
@@ -1828,13 +1906,14 @@ South Pacific    →  Cyclone season status, Fiji-NZ weather window, NZ biosecur
 Bay of Biscay    →  Current pressure pattern, Ushant/Finisterre winds, 5-day outlook
 Norwegian Sea    →  Depression tracking, fog reports, sea temperature, ice limits</div>
 
-      <div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap">
-        <button class="intel-api-btn" id="intelRunBtn" onclick="runIntelCheck()" disabled>Check All Chokepoints</button>
-        <button class="intel-api-btn" id="passageRunBtn" onclick="runPassageCheck()" disabled>Check All Passages</button>
-        <button class="intel-api-btn secondary" onclick="document.getElementById('intelApiResult').style.display='none'">Clear Results</button>
-      </div>
+        <div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap">
+          <button class="intel-api-btn" id="intelRunBtn" onclick="runIntelCheck()" disabled>Check All Chokepoints</button>
+          <button class="intel-api-btn" id="passageRunBtn" onclick="runPassageCheck()" disabled>Check All Passages</button>
+          <button class="intel-api-btn secondary" onclick="document.getElementById('intelApiResult').style.display='none'">Clear Results</button>
+        </div>
 
-      <div class="intel-api-result" id="intelApiResult"></div>
+        <div class="intel-api-result" id="intelApiResult"></div>
+      </div>
     </div>
 
     <div class="footer" style="margin-top:32px">
@@ -4820,11 +4899,7 @@ const AKE_HORIZONS_CONFIG = {
   anthropic_api_key: null  // Set to 'sk-ant-...' to enable alert checking
 };
 
-// Show alert check button if API key is configured
-if (AKE_HORIZONS_CONFIG.anthropic_api_key) {
-  document.getElementById('alertCheckBtn').style.display = 'flex';
-  document.getElementById('alertRunBtn').style.display = 'inline-block';
-}
+// Legacy alert check button removed — alerts now use the bell icon and Alerts view
 
 function openAlertChecker() {
   document.getElementById('alertModal').style.display = 'flex';
@@ -5039,17 +5114,19 @@ toggleFxPopover = function(e) {
 function setView(view) {
   currentView = view;
   document.querySelectorAll('.view-nav-btn').forEach(b => b.classList.remove('active'));
-  document.querySelector(`.view-nav-btn[onclick="setView('${view}')"]`).classList.add('active');
+  const navBtn = document.querySelector(`.view-nav-btn[onclick="setView('${view}')"]`);
+  if (navBtn) navBtn.classList.add('active');
   
   document.getElementById('map').style.display = view === 'map' ? '' : 'none';
   document.getElementById('secBar').style.display = view === 'map' ? '' : 'none';
   document.getElementById('detailPanel').classList.remove('open');
   document.getElementById('compareView').classList.toggle('active', view === 'compare');
   document.getElementById('passagesView').classList.toggle('active', view === 'passages');
+  document.getElementById('alertsView').classList.toggle('active', view === 'alerts');
   
   if (view === 'compare') buildCompareTable();
   if (view === 'map') map.invalidateSize();
-
+  if (view === 'alerts' && !alertsGridBuilt) buildAlertsGrid();
 }
 
 // ══════════════════════════════════════════════════════
@@ -5124,6 +5201,27 @@ function openPanel(name) {
   
   body.innerHTML = `
     <div style="margin-bottom:16px">${statusBadge(ops.overall_status)}</div>
+    
+    ${(() => {
+      const alert = ops.airports && ops.airports.alerts;
+      const isClear = !alert || alert.severity === 'clear';
+      const barCls = isClear ? 'green' : alert.severity === 'high' ? 'red' : 'amber';
+      const icon = isClear ? '✓' : '⚠️';
+      const stLabel = isClear ? 'Clear' : alert.severity === 'high' ? 'Alert' : 'Advisory';
+      const stCls = isClear ? 'green' : alert.severity === 'high' ? 'red' : 'amber';
+      const bodyText = isClear ? (alert && alert.text ? alert.text : 'No current airport or travel disruptions.') : `<strong>${alert.title}:</strong> ${alert.text}`;
+      return `<div style="background:var(--bg-card);border:1px solid var(--border);margin-bottom:16px;overflow:hidden">
+        <div style="height:3px;background:var(--${barCls})"></div>
+        <div style="padding:10px 14px">
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">
+            <div style="width:6px;height:6px;border-radius:50%;background:var(--${stCls})"></div>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:8px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:var(--${stCls})">Travel Status: ${stLabel}</span>
+          </div>
+          <div style="font-family:'Karla',sans-serif;font-size:11px;font-weight:300;line-height:1.5;color:var(--text-body)">${bodyText}</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:var(--text-dim);margin-top:4px">April 2026 · See Alerts tab for full monitoring</div>
+        </div>
+      </div>`;
+    })()}
     
     <div class="op-grid">
       <div class="op-grid-item">
@@ -5241,15 +5339,33 @@ function openBriefing(name) {
       <div class="bf-rule"></div>
     </div>
     
-    ${ops.airports && ops.airports.alerts ? `<div class="bf-alert-banner${ops.airports.alerts.severity === 'high' ? ' red-alert' : ''}" id="alertBanner-top"><strong>&#9888; Travel / Airport Alert:</strong> ${ops.airports.alerts.text}</div>` : ''}
-    
-    <div id="alertRefreshArea" data-dest="${name}">
-      <button class="alert-refresh-btn" onclick="refreshAlerts('${name}')">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
-        Check for travel alerts
-      </button>
-      <div id="alertRefreshResult" style="display:none"></div>
-    </div>
+    ${(() => {
+      const alert = ops.airports && ops.airports.alerts;
+      const isClear = !alert || alert.severity === 'clear';
+      const barCls = isClear ? 'green' : alert.severity === 'high' ? 'red' : 'amber';
+      const icon = isClear ? '✓' : '⚠️';
+      const stLabel = isClear ? 'Clear' : alert.severity === 'high' ? 'Alert' : 'Advisory';
+      const stCls = isClear ? 'green' : alert.severity === 'high' ? 'red' : 'amber';
+      const bodyText = isClear 
+        ? (alert && alert.text ? alert.text : 'No current airport or travel disruptions identified for this destination.')
+        : `<strong>${alert.title}:</strong> ${alert.text}`;
+      return `<div class="live-intel-box" id="briefing-intel-box">
+        <div class="live-intel-box-bar ${barCls}" id="briefing-intel-bar"></div>
+        <div class="live-intel-box-inner">
+          <div class="live-intel-box-left">
+            <div class="live-intel-box-icon">${icon}</div>
+            <div class="live-intel-box-status ${stCls}" id="briefing-intel-status">${stLabel}</div>
+          </div>
+          <div class="live-intel-box-content">
+            <div class="live-intel-box-title">Airport &amp; Travel Status</div>
+            <div class="live-intel-box-text" id="briefing-intel-text">${bodyText}</div>
+            <div class="live-intel-box-meta" id="briefing-intel-meta">April 2026 · Click refresh for live check via Claude API</div>
+          </div>
+          <button class="live-intel-box-update" onclick="refreshAlerts('${name}')" title="Check live conditions">Check ↻</button>
+        </div>
+      </div>`;
+    })()}
+    <div id="alertRefreshResult" style="display:none;margin-bottom:16px"></div>
     
     ${section('⚖', 'Entry and Compliance', ops.entry.cabotage.status, `
       <p><strong>Cabotage / Charter:</strong> ${ops.entry.cabotage.text}</p>
@@ -5475,24 +5591,33 @@ let _apiKey = sessionStorage.getItem('ake_api_key') || '';
 
 function refreshAlerts(destName) {
   const resultEl = document.getElementById('alertRefreshResult');
-  const btn = document.querySelector('#alertRefreshArea .alert-refresh-btn');
+  const bar = document.getElementById('briefing-intel-bar');
+  const statusEl = document.getElementById('briefing-intel-status');
+  const textEl = document.getElementById('briefing-intel-text');
+  const metaEl = document.getElementById('briefing-intel-meta');
   
-  if (!_apiKey) {
-    resultEl.style.display = 'block';
-    resultEl.innerHTML = `
-      <div class="alert-api-key-prompt">
-        <div>Enter Anthropic API key to enable live alert checks:</div>
-        <input type="password" id="apiKeyInput" placeholder="sk-ant-..." />
-        <button onclick="saveApiKey('${destName}')">Save & Check</button>
-        <div style="margin-top:4px;font-size:9px;color:var(--text-dim)">Key stored in session only — never saved to disk or transmitted elsewhere.</div>
-      </div>
-    `;
+  // Check for API key - try alerts key first, then general key
+  const key = _alertsApiKey || _apiKey || sessionStorage.getItem('ake_alerts_key') || sessionStorage.getItem('ake_api_key');
+  
+  if (!key) {
+    if (resultEl) {
+      resultEl.style.display = 'block';
+      resultEl.innerHTML = `
+        <div class="alert-api-key-prompt">
+          <div>Enter Anthropic API key to enable live alert checks:</div>
+          <input type="password" id="apiKeyInput" placeholder="sk-ant-..." />
+          <button onclick="saveApiKey('${destName}')">Save & Check</button>
+          <div style="margin-top:4px;font-size:9px;color:var(--text-dim)">Key stored in session only. Or set it on the Alerts tab.</div>
+        </div>
+      `;
+    }
     return;
   }
   
-  btn.classList.add('loading');
-  btn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg> Checking...`;
-  resultEl.style.display = 'none';
+  // Update intel box to show loading
+  if (statusEl) { statusEl.textContent = '...'; statusEl.className = 'live-intel-box-status'; }
+  if (bar) bar.className = 'live-intel-box-bar';
+  if (metaEl) metaEl.textContent = 'Checking... this may take 20-40 seconds';
   
   const ops = OPS_DATA[destName];
   const airports = ops ? [ops.airports.primary.name, ops.airports.secondary ? ops.airports.secondary.name : ''].filter(Boolean).join(', ') : destName;
@@ -5521,7 +5646,7 @@ If there are no current disruptions, return has_alerts: false with an empty aler
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'x-api-key': _apiKey,
+      'x-api-key': key,
       'anthropic-version': '2023-06-01',
       'anthropic-dangerous-direct-browser-access': 'true'
     },
@@ -5537,59 +5662,37 @@ If there are no current disruptions, return has_alerts: false with an empty aler
     return r.json();
   })
   .then(data => {
-    // Extract text from response content blocks
     const textBlocks = data.content.filter(b => b.type === 'text').map(b => b.text);
     const fullText = textBlocks.join('\n');
-    
-    // Parse JSON from response
     const clean = fullText.replace(/```json|```/g, '').trim();
     let result;
-    try {
-      result = JSON.parse(clean);
-    } catch(e) {
-      // If JSON parse fails, show raw response
-      resultEl.style.display = 'block';
-      resultEl.innerHTML = `<div class="alert-api-result">${fullText.replace(/\n/g, '<br>')}</div>`;
-      resetRefreshBtn(btn);
+    try { result = JSON.parse(clean); } catch(e) {
+      if (textEl) textEl.innerHTML = fullText.substring(0, 500);
+      if (metaEl) metaEl.textContent = 'Parse failed — raw response shown';
       return;
     }
     
-    resultEl.style.display = 'block';
-    
     if (result.has_alerts && result.alerts && result.alerts.length > 0) {
-      // Update the OPS_DATA with the new alert (use first alert)
       const a = result.alerts[0];
-      if (ops) {
-        ops.airports.alerts = { severity: a.severity, title: a.title, text: a.text };
-      }
-      
-      let alertHtml = result.alerts.map(a => 
-        `<div class="bf-alert-banner${a.severity === 'high' ? ' red-alert' : ''}"><strong>&#9888; ${a.title}:</strong> ${a.text}</div>`
-      ).join('');
-      alertHtml += `<div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--text-dim);margin-top:4px">Checked ${result.checked_date || 'just now'} via Claude API with web search</div>`;
-      resultEl.innerHTML = alertHtml;
-      
-      // Also update the top banner
-      const topBanner = document.getElementById('alertBanner-top');
-      if (topBanner) {
-        topBanner.className = `bf-alert-banner${a.severity === 'high' ? ' red-alert' : ''}`;
-        topBanner.innerHTML = `<strong>&#9888; ${a.title}:</strong> ${a.text}`;
-      }
+      const sev = a.severity || 'low';
+      const barCls = sev === 'high' ? 'red' : 'amber';
+      const stLabel = sev === 'high' ? 'Alert' : 'Advisory';
+      if (ops) ops.airports.alerts = { severity: sev, title: a.title, text: a.text };
+      if (bar) bar.className = 'live-intel-box-bar ' + barCls;
+      if (statusEl) { statusEl.className = 'live-intel-box-status ' + barCls; statusEl.textContent = stLabel; }
+      if (textEl) textEl.innerHTML = result.alerts.map(al => `<strong>${al.title}:</strong> ${al.text}`).join('<br>');
+      if (metaEl) metaEl.textContent = `Live data · ${result.checked_date || 'Today'} · via Claude API`;
     } else {
-      // Clear any existing alert
-      if (ops && ops.airports.alerts) delete ops.airports.alerts;
-      resultEl.innerHTML = `<div class="alert-api-result"><span class="no-alerts">&#10003; No current disruptions identified</span> for ${destName}.<div style="font-family:'IBM Plex Mono',monospace;font-size:8px;color:var(--text-dim);margin-top:4px">Checked ${result.checked_date || 'just now'} via Claude API with web search</div></div>`;
-      
-      const topBanner = document.getElementById('alertBanner-top');
-      if (topBanner) topBanner.style.display = 'none';
+      if (ops && ops.airports) ops.airports.alerts = { severity: 'clear', title: 'Clear', text: result.summary || 'No current disruptions.' };
+      if (bar) bar.className = 'live-intel-box-bar green';
+      if (statusEl) { statusEl.className = 'live-intel-box-status green'; statusEl.textContent = 'Clear'; }
+      if (textEl) textEl.innerHTML = result.summary || 'No current disruptions identified.';
+      if (metaEl) metaEl.textContent = `Live data · ${result.checked_date || 'Today'} · via Claude API`;
     }
-    
-    resetRefreshBtn(btn);
   })
   .catch(err => {
-    resultEl.style.display = 'block';
-    resultEl.innerHTML = `<div class="alert-api-result" style="color:var(--red)">Unable to check alerts: ${err.message}. Verify API key and connection.</div>`;
-    resetRefreshBtn(btn);
+    if (textEl) textEl.innerHTML = `<span style="color:var(--red)">Unable to check: ${err.message}</span>`;
+    if (metaEl) metaEl.textContent = 'Check API key and connection';
   });
 }
 
@@ -5618,6 +5721,255 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('compareDestA').value = 'FRENCH RIVIERA';
   document.getElementById('compareDestB').value = 'BAHAMAS AND EXUMAS';
 });
+
+// ══════════════════════════════════════════════════════
+// ALERTS VIEW
+// ══════════════════════════════════════════════════════
+let alertsGridBuilt = false;
+let _alertsApiKey = null;
+
+// Pre-populated sample alerts from web research — April 16, 2026
+// These represent real disruptions found via search. The API "Check All" button will refresh with live data.
+(function initSampleAlerts() {
+  const sampleAlerts = {
+    'FRENCH RIVIERA': { severity: 'low', title: 'Nice Airport Delays', text: 'French ATC strikes and staffing constraints causing delays at Nice Côte d\'Azur. 75+ flights cancelled and 186 delayed nationally on Apr 11. Paris CDG cascading effects. Allow extra time for crew/guest transfers via France.' },
+    'BALEARICS': { severity: 'low', title: 'Spain Hub Delays', text: 'Madrid-Barajas and Barcelona-El Prat experiencing cascading delays from Lufthansa network disruption (82% grounded) and ATC staffing. Palma de Mallorca secondary effects. Check transfer routing.' },
+    'AMALFI COAST AND SARDINIA': { severity: 'high', title: 'Italian ATC Strikes', text: 'Italian air traffic control walkouts ongoing in April 2026. Rome Fiumicino and Milan Malpensa among worst hit — hundreds of delayed movements. Naples (NAP) affected. Mediterranean storms compounding delays.' },
+    'GREECE': { severity: 'low', title: 'Athens Spike Delays', text: 'Athens International Airport experiencing spike delays linked to combined airspace restrictions and Europe-wide network congestion. Secondary effects from Italian and German strikes. Monitor connections.' },
+    'TURKEY': { severity: 'low', title: 'Istanbul Routing Delays', text: 'Airspace closures over Iran and Iraq causing rerouting for flights via Istanbul. Extended flight times on Gulf and Asia connections. IST operational but knock-on delays from European network disruption.' },
+    'CROATIA AND MONTENEGRO': { severity: 'low', title: 'European Network Effects', text: 'No local disruption but connections through Frankfurt, Munich, and Rome are heavily disrupted by Lufthansa strikes and Italian ATC action. Route via Vienna or Zurich as alternatives.' },
+    'RED SEA EGYPT': { severity: 'high', title: 'Regional Airspace Restrictions', text: 'Airspace closures over parts of the Middle East affecting routing. Hurghada and Sharm el-Sheikh accessible but some European carriers have suspended services. Check airline operating status before booking crew transfers.' },
+    'MALDIVES': { severity: 'low', title: 'UAE Connection Disruption', text: 'Dubai-Malé route affected by UAE airport disruptions — 124 delays and 22 cancellations at DXB on Apr 15. Emirates operating reduced schedule (125 of 140 destinations). Foreign carriers limited to one daily round-trip at DXB until May 31. Consider Colombo or Singapore routing.' },
+    'INDONESIA': { severity: 'low', title: 'IndiGo Cuts', text: 'IndiGo cancelled 9 UAE-India services on Apr 15 with further cuts warned. Affects Bali connections routing via Dubai/Abu Dhabi. Singapore routing unaffected. DPS direct services operating normally.' },
+    'NORWAY AND FJORDS': { severity: 'low', title: 'Oslo Weather Delays', text: 'Oslo absorbed weather-related disruptions in early April. Bergen and Tromsø less affected. Lufthansa connections via Frankfurt/Munich severely disrupted — consider SAS or Norwegian direct services.' },
+    'ICELAND': { severity: 'low', title: 'European Connection Issues', text: 'Keflavik (KEF) direct services to London and New York operating normally. Connections via European hubs (Frankfurt, Amsterdam) subject to cascading delays from Lufthansa strikes and European ATC disruption.' },
+    'BAHAMAS AND EXUMAS': { severity: 'clear', title: 'Clear', text: 'Nassau (NAS) and Exuma (GGT) operating normally. No disruptions to US connections via Miami, Fort Lauderdale, or Atlanta.' },
+    'BVIS AND ST BARTS': { severity: 'clear', title: 'Clear', text: 'Terrance B. Lettsome (EIS) and Gustaf III (SBH) operating normally. San Juan (SJU) connections unaffected.' },
+    'ANTIGUA': { severity: 'clear', title: 'Clear', text: 'V.C. Bird International (ANU) operating normally. Direct services to London, Miami, and Toronto on schedule.' },
+    'GRENADA AND SOUTHERN CARIBBEAN': { severity: 'clear', title: 'Clear', text: 'Maurice Bishop International (GND) operating normally. No disruptions reported. US and UK connections on schedule.' },
+    'SEYCHELLES': { severity: 'clear', title: 'Clear', text: 'Seychelles International (SEZ) operating normally. Direct services to Dubai affected by UAE disruption but Emirates Seychelles route currently running. Air France and Kenya Airways connections stable.' },
+    'JAPAN': { severity: 'clear', title: 'Clear', text: 'Narita (NRT) and Haneda (HND) operating normally. No domestic or international disruptions. European connections via Middle East may be affected — consider direct trans-Pacific routing from London or Paris.' },
+    'FRENCH POLYNESIA': { severity: 'clear', title: 'Clear', text: 'Faa\'a International (PPT) operating normally. Air France and Air Tahiti Nui services to Paris and Los Angeles on schedule. No disruptions.' },
+    'NEW ZEALAND': { severity: 'clear', title: 'Clear', text: 'Auckland (AKL) operating normally. No disruptions. Direct services to London (via Singapore), Los Angeles, and regional Pacific connections all on schedule.' },
+    'ALASKA AND BRITISH COLUMBIA': { severity: 'clear', title: 'Clear', text: 'Juneau (JNU), Ketchikan (KTN), and Vancouver (YVR) operating normally. No disruptions to US domestic or Canada connections.' },
+    'GALAPAGOS': { severity: 'clear', title: 'Clear', text: 'Baltra (GPS) and San Cristóbal (SCY) operating normally. Quito (UIO) and Guayaquil (GYE) connections stable. Entry permits required 60+ days in advance.' },
+    'PATAGONIA AND ANTARCTICA': { severity: 'clear', title: 'Clear', text: 'Ushuaia (USH) operating normally. Buenos Aires (EZE) connections stable. Off-season for Antarctic expeditions (resumes November).' }
+  };
+  for (const [dest, alert] of Object.entries(sampleAlerts)) {
+    if (OPS_DATA[dest] && OPS_DATA[dest].airports) {
+      OPS_DATA[dest].airports.alerts = alert;
+    }
+  }
+  // Update badge count after sample alerts are loaded
+  setTimeout(updateAlertBadge, 0);
+})();
+
+function updateAlertBadge() {
+  let count = 0;
+  for (const name of Object.keys(OPS_DATA)) {
+    const ops = OPS_DATA[name];
+    if (ops && ops.airports && ops.airports.alerts && ops.airports.alerts.severity && ops.airports.alerts.severity !== 'clear') {
+      count++;
+    }
+  }
+  const badge = document.getElementById('alertCountBadge');
+  if (badge) {
+    badge.textContent = count;
+    badge.className = count === 0 ? 'alert-count clear' : 'alert-count';
+  }
+}
+
+function buildAlertsGrid() {
+  const grid = document.getElementById('alertsGrid');
+  const dests = Object.keys(OPS_DATA).sort();
+  let html = '';
+  let clearCount = 0, lowCount = 0, highCount = 0;
+  for (const name of dests) {
+    const ops = OPS_DATA[name];
+    const primary = ops.airports && ops.airports.primary ? ops.airports.primary.name : '';
+    const secondary = ops.airports && ops.airports.secondary && ops.airports.secondary.name !== 'No secondary airport' ? ops.airports.secondary.name : '';
+    const airportStr = [primary, secondary].filter(Boolean).join(' · ');
+    const existing = ops.airports && ops.airports.alerts;
+    const isClear = !existing || existing.severity === 'clear';
+    const st = isClear ? 'clear' : existing.severity;
+    const stLabel = isClear ? 'Clear' : (existing.severity === 'high' ? 'Alert' : 'Advisory');
+    const bodyText = isClear ? (existing && existing.text ? existing.text : 'No current disruptions identified.') : `<strong>${existing.title || 'Alert'}:</strong> ${existing.text}`;
+    
+    if (isClear) clearCount++; else if (st === 'high') highCount++; else lowCount++;
+    
+    html += `<div class="alert-card" id="alert-card-${name.replace(/[^a-zA-Z0-9]/g,'_')}" onclick="openBriefingFromAlert('${name}')">
+      <div class="alert-card-bar ${st}"></div>
+      <div class="alert-card-name">${name.split(' ').map(w=>w.charAt(0)+w.slice(1).toLowerCase()).join(' ')}</div>
+      <div class="alert-card-airports">${airportStr}</div>
+      <div class="alert-card-status">
+        <div class="alert-card-dot ${st}"></div>
+        <div class="alert-card-stxt ${st}">${stLabel}</div>
+      </div>
+      <div class="alert-card-body">${bodyText}</div>
+      <div class="alert-card-meta">April 16, 2026 · Click to open briefing</div>
+    </div>`;
+  }
+  grid.innerHTML = html;
+  
+  document.getElementById('alertsSummary').innerHTML = `
+    <div class="alerts-summary-item"><div class="alert-card-dot clear"></div><span class="alerts-summary-count">${clearCount}</span> clear</div>
+    ${lowCount > 0 ? `<div class="alerts-summary-item"><div class="alert-card-dot low"></div><span class="alerts-summary-count">${lowCount}</span> advisory</div>` : ''}
+    ${highCount > 0 ? `<div class="alerts-summary-item"><div class="alert-card-dot high"></div><span class="alerts-summary-count">${highCount}</span> alert</div>` : ''}
+    <div class="alerts-summary-item" style="color:var(--text-dim);font-size:9px">Sample data · April 16, 2026 · Connect API to refresh</div>
+  `;
+  alertsGridBuilt = true;
+}
+
+function openBriefingFromAlert(destName) {
+  setView('map');
+  setTimeout(() => {
+    const dest = DESTINATIONS.find(d => d.name === destName);
+    if (dest) { selectDestination(destName); openBriefing(destName); }
+  }, 100);
+}
+
+function saveAlertsKey() {
+  const key = document.getElementById('alertsApiKey').value.trim();
+  if (key && key.startsWith('sk-ant-')) {
+    _alertsApiKey = key;
+    sessionStorage.setItem('ake_alerts_key', key);
+    document.getElementById('alertsRunBtn').disabled = false;
+    document.getElementById('alertsApiKey').value = '••••••••' + key.slice(-6);
+    // Also set the per-briefing API key
+    _apiKey = key;
+  }
+}
+
+// Restore alerts key on load
+(function() {
+  const k = sessionStorage.getItem('ake_alerts_key');
+  if (k) {
+    _alertsApiKey = k;
+    _apiKey = k;
+    const btn = document.getElementById('alertsRunBtn');
+    const input = document.getElementById('alertsApiKey');
+    if (btn) btn.disabled = false;
+    if (input) input.value = '••••••••' + k.slice(-6);
+  }
+})();
+
+async function runAllAlertsCheck() {
+  if (!_alertsApiKey) return;
+  
+  const btn = document.getElementById('alertsRunBtn');
+  const summaryEl = document.getElementById('alertsSummary');
+  btn.disabled = true;
+  btn.textContent = 'Checking all 22 destinations...';
+  summaryEl.innerHTML = '<div class="alerts-summary-item"><div class="alert-card-dot unchecked"></div><span>Querying via Claude API with web search... this may take 60-90 seconds.</span></div>';
+  
+  const dests = Object.keys(OPS_DATA);
+  const destList = dests.map(d => {
+    const ops = OPS_DATA[d];
+    const airports = [];
+    if (ops.airports && ops.airports.primary) airports.push(ops.airports.primary.name);
+    if (ops.airports && ops.airports.secondary && ops.airports.secondary.name !== 'No secondary airport') airports.push(ops.airports.secondary.name);
+    return `${d}: ${airports.join(', ')}`;
+  }).join('\n');
+  
+  const prompt = `You are an aviation and travel intelligence analyst. For each destination and its airports listed below, check for CURRENT (as of today) disruptions affecting a superyacht operator planning crew or guest transfers. Check for:
+- Airport strikes (ATC, ground handling, airline, security)
+- Terminal closures or major construction
+- TSA / security / immigration processing delays
+- Airspace restrictions or NOTAM issues
+- Significant airline schedule disruptions or cancellations
+- Weather-related closures
+- Any other operational disruptions
+
+Destinations and airports:
+${destList}
+
+Respond ONLY in JSON (no markdown, no backticks):
+{"alerts": [
+  {"destination": "DESTINATION NAME", "status": "clear", "summary": "No current disruptions"}
+  or
+  {"destination": "DESTINATION NAME", "status": "alert", "severity": "low|high", "title": "Short Title", "text": "Concise description of issue and operational impact", "summary": "One sentence"}
+]}
+
+Include ALL ${dests.length} destinations in your response.`;
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': _alertsApiKey,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 4000,
+        tools: [{ type: 'web_search_20250305', name: 'web_search' }],
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+    
+    const data = await response.json();
+    const text = data.content.map(c => c.type === 'text' ? c.text : '').join('');
+    
+    let parsed;
+    try {
+      parsed = JSON.parse(text.replace(/```json|```/g, '').trim());
+    } catch(e) {
+      summaryEl.innerHTML = `<div class="alerts-summary-item" style="color:var(--red)">JSON parse failed — check console</div>`;
+      console.log('Raw alert response:', text);
+      btn.disabled = false; btn.textContent = 'Check All Destinations'; return;
+    }
+    
+    let clearCount = 0, lowCount = 0, highCount = 0;
+    
+    for (const a of parsed.alerts || []) {
+      const destKey = a.destination;
+      const cardId = 'alert-card-' + destKey.replace(/[^a-zA-Z0-9]/g, '_');
+      const card = document.getElementById(cardId);
+      const ops = OPS_DATA[destKey];
+      
+      if (a.status === 'clear') {
+        clearCount++;
+        if (ops && ops.airports && ops.airports.alerts) delete ops.airports.alerts;
+        if (card) {
+          card.querySelector('.alert-card-bar').className = 'alert-card-bar clear';
+          card.querySelector('.alert-card-dot').className = 'alert-card-dot clear';
+          const stxt = card.querySelector('.alert-card-stxt');
+          stxt.className = 'alert-card-stxt clear'; stxt.textContent = 'Clear';
+          card.querySelector('.alert-card-body').innerHTML = a.summary || 'No current disruptions.';
+          card.querySelector('.alert-card-meta').textContent = 'Checked just now via Claude API';
+        }
+      } else {
+        const sev = a.severity || 'low';
+        if (sev === 'high') highCount++; else lowCount++;
+        if (ops) ops.airports.alerts = { severity: sev, title: a.title || 'Alert', text: a.text || a.summary };
+        if (card) {
+          card.querySelector('.alert-card-bar').className = 'alert-card-bar ' + sev;
+          card.querySelector('.alert-card-dot').className = 'alert-card-dot ' + sev;
+          const stxt = card.querySelector('.alert-card-stxt');
+          stxt.className = 'alert-card-stxt ' + sev; stxt.textContent = sev === 'high' ? 'Alert' : 'Advisory';
+          card.querySelector('.alert-card-body').innerHTML = `<strong>${a.title || 'Alert'}:</strong> ${a.text || a.summary}`;
+          card.querySelector('.alert-card-meta').textContent = 'Checked just now via Claude API';
+        }
+      }
+    }
+    
+    summaryEl.innerHTML = `
+      <div class="alerts-summary-item"><div class="alert-card-dot clear"></div><span class="alerts-summary-count">${clearCount}</span> clear</div>
+      ${lowCount > 0 ? `<div class="alerts-summary-item"><div class="alert-card-dot low"></div><span class="alerts-summary-count">${lowCount}</span> advisory</div>` : ''}
+      ${highCount > 0 ? `<div class="alerts-summary-item"><div class="alert-card-dot high"></div><span class="alerts-summary-count">${highCount}</span> alert</div>` : ''}
+      <div class="alerts-summary-item" style="color:var(--text-dim);font-size:9px">Checked just now</div>
+    `;
+    
+  } catch(err) {
+    summaryEl.innerHTML = `<div class="alerts-summary-item" style="color:var(--red)">Error: ${err.message}</div>`;
+  }
+  
+  btn.disabled = false;
+  btn.textContent = 'Check All Destinations';
+  updateAlertBadge();
+}
 
 // ══════════════════════════════════════════════════════
 // PASSAGE INTELLIGENCE
