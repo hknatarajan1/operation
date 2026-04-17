@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AKE Horizons — Operations</title>
+<title>AKE Destinations — Operations</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Karla:wght@300;400;500;600&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
@@ -41,7 +41,7 @@ body{font-family:'Karla',sans-serif;font-weight:300;background:var(--bg);color:v
 .layer-popover-wrap{position:relative}
 .layer-icon-btn{background:transparent;border:1px solid var(--border);border-radius:2px;padding:6px;cursor:pointer;color:var(--text-muted);display:flex;align-items:center;justify-content:center;transition:all .2s;width:30px;height:30px}
 .layer-icon-btn:hover{border-color:var(--border-strong);color:var(--text)}
-.layer-popover{position:absolute;top:calc(100% + 6px);right:0;background:var(--bg-card);border:1px solid var(--border);box-shadow:0 4px 20px rgba(0,0,0,0.08);min-width:140px;z-index:200;display:none;padding:6px}
+.layer-popover{position:absolute;top:calc(100% + 6px);right:0;background:var(--bg-card);border:1px solid var(--border);box-shadow:0 4px 20px rgba(0,0,0,0.08);min-width:140px;z-index:9999;display:none;padding:6px}
 .layer-popover.open{display:block}
 .layer-popover-head{font-family:'IBM Plex Mono',monospace;font-size:8px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--text-dim);padding:6px 10px 4px}
 .layer-opt{display:block;width:100%;text-align:left;font-family:'Karla',sans-serif;font-size:12px;padding:6px 10px;background:transparent;border:none;color:var(--text-body);cursor:pointer;transition:all .15s;border-radius:2px}
@@ -235,15 +235,15 @@ body{font-family:'Karla',sans-serif;font-weight:300;background:var(--bg);color:v
 .alert-count.none{display:none}
 
 /* ── COMPARE VIEW ── */
-.compare-view{position:fixed;top:96px;left:0;right:0;bottom:0;z-index:500;background:var(--bg);display:none;overflow-y:auto}
+.compare-view{position:fixed;top:96px;left:0;right:0;bottom:0;z-index:400;background:var(--bg);display:none;overflow-y:auto}
 .compare-view.active{display:block}
 
 /* ── PASSAGES VIEW ── */
-.passages-view{position:fixed;top:96px;left:0;right:0;bottom:0;z-index:500;background:var(--bg);display:none;overflow-y:auto}
+.passages-view{position:fixed;top:96px;left:0;right:0;bottom:0;z-index:400;background:var(--bg);display:none;overflow-y:auto}
 .passages-view.active{display:block}
 
 /* ── ALERTS VIEW ── */
-.alerts-view{position:fixed;top:96px;left:0;right:0;bottom:0;z-index:500;background:var(--bg);display:none;overflow-y:auto}
+.alerts-view{position:fixed;top:96px;left:0;right:0;bottom:0;z-index:400;background:var(--bg);display:none;overflow-y:auto}
 .alerts-view.active{display:block}
 .alerts-container{max-width:1000px;margin:0 auto;padding:32px 24px 80px}
 .alerts-hero-type{font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
@@ -503,7 +503,7 @@ body{font-family:'Karla',sans-serif;font-weight:300;background:var(--bg);color:v
 <div class="header">
   <div class="header-brand">
     <div class="header-red"></div>
-    <div class="header-title">AKE Horizons</div>
+    <div class="header-title">AKE Destinations</div>
     <span class="header-edition">Operations</span>
   </div>
   <div class="header-spacer"></div>
@@ -557,7 +557,7 @@ body{font-family:'Karla',sans-serif;font-weight:300;background:var(--bg);color:v
     <div id="alertModalContent" style="font-family:'Karla',sans-serif;font-size:13px;line-height:1.6;color:var(--text-body)">
       <p>This feature calls the Anthropic API to check current airport disruptions, strikes, terminal issues, and transit advisories for all destinations in the dashboard.</p>
       <p style="margin-top:10px">To activate, set your API key in the configuration:</p>
-      <pre style="background:var(--bg);border:1px solid var(--border);padding:10px 12px;font-family:'IBM Plex Mono',monospace;font-size:11px;margin:10px 0;overflow-x:auto;color:var(--text)">AKE_HORIZONS_CONFIG.anthropic_api_key = 'sk-ant-...';</pre>
+      <pre style="background:var(--bg);border:1px solid var(--border);padding:10px 12px;font-family:'IBM Plex Mono',monospace;font-size:11px;margin:10px 0;overflow-x:auto;color:var(--text)">AKE_DESTINATIONS_CONFIG.anthropic_api_key = 'sk-ant-...';</pre>
       <p style="font-size:11px;color:var(--text-muted);margin-top:8px">The button in the header bar (triangle icon) will become visible once a key is set. Results are advisory — review and edit before publishing to the dashboard.</p>
     </div>
     <div id="alertModalResults" style="display:none;margin-top:16px"></div>
@@ -857,7 +857,7 @@ body{font-family:'Karla',sans-serif;font-weight:300;background:var(--bg);color:v
     </div>
 
     <div class="footer">
-      <div class="footer-text">AKE Horizons · Passage Intelligence · Last reviewed: April 2026</div>
+      <div class="footer-text">AKE Destinations · Passage Intelligence · Last reviewed: April 2026</div>
       <div class="footer-disclaimer">This briefing is for operational planning purposes. Conditions change — use professional weather routing and confirm critical details before committing to a passage.</div>
     </div>
 
@@ -1055,7 +1055,7 @@ body{font-family:'Karla',sans-serif;font-weight:300;background:var(--bg);color:v
     </div>
 
     <div class="footer">
-      <div class="footer-text">AKE Horizons · Passage Intelligence · Last reviewed: April 2026</div>
+      <div class="footer-text">AKE Destinations · Passage Intelligence · Last reviewed: April 2026</div>
       <div class="footer-disclaimer">This briefing is for operational planning purposes. Conditions change — confirm the Red Sea security situation and insurance status before committing to a Suez transit.</div>
     </div>
 
@@ -1133,7 +1133,7 @@ body{font-family:'Karla',sans-serif;font-weight:300;background:var(--bg);color:v
       </tbody></table>
       <p><strong>Provisioning:</strong> Panama City has excellent provisioning — modern supermarkets, yacht chandlery, fresh produce markets. Colon is more limited. Provision in Panama City if transiting northbound. Duty-free fuel available in the Colon Free Zone (Atlantic side).</p>
     </div></div></div>
-    <div class="footer"><div class="footer-text">AKE Horizons · Passage Intelligence · Last reviewed: April 2026</div><div class="footer-disclaimer">This briefing is for operational planning purposes. Confirm current ACP scheduling, tolls, and water level conditions with your agent before committing.</div></div>
+    <div class="footer"><div class="footer-text">AKE Destinations · Passage Intelligence · Last reviewed: April 2026</div><div class="footer-disclaimer">This briefing is for operational planning purposes. Confirm current ACP scheduling, tolls, and water level conditions with your agent before committing.</div></div>
   </div>
 
   <!-- CORINTH CANAL TRANSIT -->
@@ -1185,7 +1185,7 @@ body{font-family:'Karla',sans-serif;font-weight:300;background:var(--bg);color:v
       <p><strong>Insurance:</strong> No JWC listing. Within standard INL. The narrow canal presents a hull contact risk — confirm your H&M policy covers canal transits. The limestone walls are unforgiving. Fender protection is essential.</p>
       <p><strong>Security:</strong> No security concerns. The canal is in a populated area of Greece with no crime risk.</p>
     </div></div></div>
-    <div class="footer"><div class="footer-text">AKE Horizons · Passage Intelligence · Last reviewed: April 2026</div><div class="footer-disclaimer">Always confirm the canal is operational before routing through it. Closures can occur at short notice due to geological instability.</div></div>
+    <div class="footer"><div class="footer-text">AKE Destinations · Passage Intelligence · Last reviewed: April 2026</div><div class="footer-disclaimer">Always confirm the canal is operational before routing through it. Closures can occur at short notice due to geological instability.</div></div>
   </div>
 
   <!-- CAPE HORN / DRAKE PASSAGE -->
@@ -1238,7 +1238,7 @@ body{font-family:'Karla',sans-serif;font-weight:300;background:var(--bg);color:v
       <p><strong>Crew Change:</strong> Ushuaia (USH airport — flights to Buenos Aires, 3h30). No crew change possible in Antarctica.</p>
       <p><strong>Communications:</strong> GMDSS Sea Area A3 (Inmarsat) through the Drake Passage. Approaching Antarctica, Inmarsat coverage becomes marginal at high latitudes — Iridium essential for Antarctic operations. HF radio for long-range communication. No cell coverage.</p>
     </div></div></div>
-    <div class="footer"><div class="footer-text">AKE Horizons · Passage Intelligence · Last reviewed: April 2026</div><div class="footer-disclaimer">The Drake Passage is among the most demanding ocean crossings on Earth. Do not attempt without an ice-rated vessel, experienced crew, professional weather routing, and confirmed polar insurance endorsement.</div></div>
+    <div class="footer"><div class="footer-text">AKE Destinations · Passage Intelligence · Last reviewed: April 2026</div><div class="footer-disclaimer">The Drake Passage is among the most demanding ocean crossings on Earth. Do not attempt without an ice-rated vessel, experienced crew, professional weather routing, and confirmed polar insurance endorsement.</div></div>
   </div>
 
   <!-- CAPE OF GOOD HOPE -->
@@ -1297,7 +1297,7 @@ body{font-family:'Karla',sans-serif;font-weight:300;background:var(--bg);color:v
       </tbody></table>
       <p><strong>Cape Town:</strong> Full provisioning, excellent South African produce (wine, meat, seafood). V&A Waterfront Marina can accommodate superyachts. Marine services available. Cape Town is a world-class city — outstanding crew destination.</p>
     </div></div></div>
-    <div class="footer"><div class="footer-text">AKE Horizons · Passage Intelligence · Last reviewed: April 2026</div><div class="footer-disclaimer">The Cape route is the standard Suez alternative. Time the Cape rounding for favourable conditions and use professional weather routing for the Agulhas Current area.</div></div>
+    <div class="footer"><div class="footer-text">AKE Destinations · Passage Intelligence · Last reviewed: April 2026</div><div class="footer-disclaimer">The Cape route is the standard Suez alternative. Time the Cape rounding for favourable conditions and use professional weather routing for the Agulhas Current area.</div></div>
   </div>
 
   <!-- STRAIT OF MALACCA -->
@@ -1352,7 +1352,7 @@ body{font-family:'Karla',sans-serif;font-weight:300;background:var(--bg);color:v
       <p><strong>Singapore:</strong> ONE°15 Marina, Raffles Marina, and Republic of Singapore Yacht Club can accommodate superyachts. Singapore is Asia's primary superyacht hub — world-class provisioning, marine services, chandlery, electronics, engineering. Bunkering at competitive prices. Excellent crew destination.</p>
       <p><strong>Fuel:</strong> Competitively priced in Singapore. Also available at Langkawi (duty-free), Penang, and Port Klang (Malaysia). Indonesian side: limited yacht-oriented bunkering.</p>
     </div></div></div>
-    <div class="footer"><div class="footer-text">AKE Horizons · Passage Intelligence · Last reviewed: April 2026</div><div class="footer-disclaimer">The Strait of Malacca is a standard passage with no special requirements beyond vigilant navigation in dense traffic. Singapore at the exit provides world-class superyacht services.</div></div>
+    <div class="footer"><div class="footer-text">AKE Destinations · Passage Intelligence · Last reviewed: April 2026</div><div class="footer-disclaimer">The Strait of Malacca is a standard passage with no special requirements beyond vigilant navigation in dense traffic. Singapore at the exit provides world-class superyacht services.</div></div>
   </div>
 
 
@@ -1411,7 +1411,7 @@ body{font-family:'Karla',sans-serif;font-weight:300;background:var(--bg);color:v
       <p><strong>Cell Coverage:</strong> Ends shortly after departure from the Caribbean. No coverage mid-ocean. Resumes approaching the Azores (~20nm) and again approaching mainland Europe.</p>
       <p><strong>Weather Data:</strong> Daily GRIB files via satellite essential. Professional weather router provides daily voice or email briefings. NOAA NHC for tropical weather monitoring. UK Met Office and Météo France for European approach.</p>
     </div></div></div>
-    <div class="footer"><div class="footer-text">AKE Horizons · Passage Intelligence · Last reviewed: April 2026</div><div class="footer-disclaimer">The eastbound Atlantic is a demanding passage. Do not attempt without professional weather routing and adequate fuel reserves for extended motoring.</div></div>
+    <div class="footer"><div class="footer-text">AKE Destinations · Passage Intelligence · Last reviewed: April 2026</div><div class="footer-disclaimer">The eastbound Atlantic is a demanding passage. Do not attempt without professional weather routing and adequate fuel reserves for extended motoring.</div></div>
   </div>
 
   <!-- INDIAN OCEAN CROSSING -->
@@ -1466,7 +1466,7 @@ body{font-family:'Karla',sans-serif;font-weight:300;background:var(--bg);color:v
       </tbody></table>
       <p><strong>Communications:</strong> GMDSS Sea Area A3 throughout. Inmarsat and Starlink Maritime provide continuous coverage. Cell coverage at island destinations only — no coverage during open-ocean passages. Iridium recommended as backup for remote Indonesian waters.</p>
     </div></div></div>
-    <div class="footer"><div class="footer-text">AKE Horizons · Passage Intelligence · Last reviewed: April 2026</div><div class="footer-disclaimer">Indian Ocean passages are monsoon-governed. Getting the season wrong is not just uncomfortable — it can be dangerous. Plan routing around the monsoon cycle.</div></div>
+    <div class="footer"><div class="footer-text">AKE Destinations · Passage Intelligence · Last reviewed: April 2026</div><div class="footer-disclaimer">Indian Ocean passages are monsoon-governed. Getting the season wrong is not just uncomfortable — it can be dangerous. Plan routing around the monsoon cycle.</div></div>
   </div>
 
   <!-- PACIFIC CROSSING (GALAPAGOS TO MARQUESAS) -->
@@ -1517,7 +1517,7 @@ body{font-family:'Karla',sans-serif;font-weight:300;background:var(--bg);color:v
       <p><strong>Cell Coverage:</strong> None for the entire crossing — approximately 2-3 weeks without cell service. Brief guests thoroughly before departure.</p>
       <p><strong>Remoteness:</strong> This is one of the most remote stretches of ocean on Earth. SAR response from either end would take days. EPIRB registration, satellite phone, and AIS are essential. Notify a shore contact of your passage plan and expected arrival window.</p>
     </div></div></div>
-    <div class="footer"><div class="footer-text">AKE Horizons · Passage Intelligence · Last reviewed: April 2026</div><div class="footer-disclaimer">This is the longest unbroken ocean passage in the dashboard. The vessel must be completely self-sufficient. There is no margin for error on fuel, provisions, or mechanical reliability.</div></div>
+    <div class="footer"><div class="footer-text">AKE Destinations · Passage Intelligence · Last reviewed: April 2026</div><div class="footer-disclaimer">This is the longest unbroken ocean passage in the dashboard. The vessel must be completely self-sufficient. There is no margin for error on fuel, provisions, or mechanical reliability.</div></div>
   </div>
 
   <!-- SOUTH PACIFIC (FRENCH POLYNESIA TO NEW ZEALAND) -->
@@ -1572,7 +1572,7 @@ body{font-family:'Karla',sans-serif;font-weight:300;background:var(--bg);color:v
       </tbody></table>
       <p><strong>Fuel:</strong> Available at all intermediate stops (Tonga, Fiji). Prices variable — Fiji is generally more expensive than Tonga. NZ fuel reasonable on arrival. Plan fuel for each leg individually — no single leg exceeds 1,200nm.</p>
     </div></div></div>
-    <div class="footer"><div class="footer-text">AKE Horizons · Passage Intelligence · Last reviewed: April 2026</div><div class="footer-disclaimer">Timing is critical. Depart before cyclone season develops and arrive in New Zealand before late November. Monitor tropical weather advisories throughout.</div></div>
+    <div class="footer"><div class="footer-text">AKE Destinations · Passage Intelligence · Last reviewed: April 2026</div><div class="footer-disclaimer">Timing is critical. Depart before cyclone season develops and arrive in New Zealand before late November. Monitor tropical weather advisories throughout.</div></div>
   </div>
 
   <!-- BAY OF BISCAY -->
@@ -1623,7 +1623,7 @@ body{font-family:'Karla',sans-serif;font-weight:300;background:var(--bg);color:v
       <p><strong>Shipping:</strong> Heavy commercial traffic, particularly around the TSS off Ushant (one of the busiest shipping lanes in the world) and approaching the Strait of Gibraltar. Maintain radar and AIS watch. The Ushant TSS has mandatory reporting for vessels over 300GT.</p>
       <p><strong>Fishing:</strong> Dense fishing fleet activity, particularly on the French continental shelf. Fishing vessels may not respond to VHF calls and may have unexpected manoeuvres. Maintain lookout at night.</p>
     </div></div></div>
-    <div class="footer"><div class="footer-text">AKE Horizons · Passage Intelligence · Last reviewed: April 2026</div><div class="footer-disclaimer">Wait for a weather window. Biscay punishes impatience. A 48-hour settled forecast is the minimum for a comfortable crossing.</div></div>
+    <div class="footer"><div class="footer-text">AKE Destinations · Passage Intelligence · Last reviewed: April 2026</div><div class="footer-disclaimer">Wait for a weather window. Biscay punishes impatience. A 48-hour settled forecast is the minimum for a comfortable crossing.</div></div>
   </div>
 
   <!-- NORWEGIAN SEA (TO ICELAND) -->
@@ -1676,7 +1676,7 @@ body{font-family:'Karla',sans-serif;font-weight:300;background:var(--bg);color:v
       <p><strong>Communications:</strong> GMDSS Sea Area A2 (MF) near coasts, A3 (Inmarsat) offshore. Cell coverage at ports only. NAVTEX provides weather warnings. Norwegian and Icelandic coast guards monitor VHF Ch 16.</p>
       <p><strong>ECA:</strong> The North Sea ECA applies to Norwegian coastal waters. Switch to 0.10 per cent sulphur fuel before entering Norwegian waters if arriving from outside the ECA.</p>
     </div></div></div>
-    <div class="footer"><div class="footer-text">AKE Horizons · Passage Intelligence · Last reviewed: April 2026</div><div class="footer-disclaimer">High-latitude passage with limited bail-out options. Wait for a 72-hour settled weather window. Cold water survival equipment is mandatory.</div></div>
+    <div class="footer"><div class="footer-text">AKE Destinations · Passage Intelligence · Last reviewed: April 2026</div><div class="footer-disclaimer">High-latitude passage with limited bail-out options. Wait for a 72-hour settled weather window. Cold water survival equipment is mandatory.</div></div>
   </div>
 
 
@@ -1917,7 +1917,7 @@ Norwegian Sea    →  Depression tracking, fog reports, sea temperature, ice lim
     </div>
 
     <div class="footer" style="margin-top:32px">
-      <div class="footer-text">AKE Horizons · Passage Intelligence · Chokepoint Monitor</div>
+      <div class="footer-text">AKE Destinations · Passage Intelligence · Chokepoint Monitor</div>
       <div class="footer-disclaimer">Static data is reviewed monthly. API results are advisory and should be verified against official sources (UKMTO, MSCHOA, ACP, SCA) before operational decisions.</div>
     </div>
 
@@ -4895,7 +4895,7 @@ document.addEventListener('click', () => document.getElementById('layerPopover')
 // ══════════════════════════════════════════════════════
 // CONFIGURATION — set API key to enable alert checking
 // ══════════════════════════════════════════════════════
-const AKE_HORIZONS_CONFIG = {
+const AKE_DESTINATIONS_CONFIG = {
   anthropic_api_key: null  // Set to 'sk-ant-...' to enable alert checking
 };
 
@@ -4906,7 +4906,7 @@ function openAlertChecker() {
 }
 
 async function runAlertCheck() {
-  const key = AKE_HORIZONS_CONFIG.anthropic_api_key;
+  const key = AKE_DESTINATIONS_CONFIG.anthropic_api_key;
   if (!key) return;
   
   const resultsEl = document.getElementById('alertModalResults');
@@ -5507,7 +5507,7 @@ function openBriefing(name) {
     
     <div class="bf-footer">
       <div class="bf-footer-rule"></div>
-      <div class="bf-footer-text">AKE Horizons · Operator Intelligence${ops.last_reviewed ? ` · Last reviewed: ${ops.last_reviewed}` : ''}</div>
+      <div class="bf-footer-text">AKE Destinations · Operator Intelligence${ops.last_reviewed ? ` · Last reviewed: ${ops.last_reviewed}` : ''}</div>
       <div class="bf-footer-disclaimer">This briefing is for operational planning purposes. Regulations change — confirm critical details with a local agent before committing to an itinerary.</div>
     </div>
   `;
